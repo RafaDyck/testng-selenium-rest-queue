@@ -9,14 +9,6 @@ services:
     ports:
       - 5672:5672
       - 15672:15672
-    expose:
-      - 5672
-      - 5671
-      - 4369
-      - 15671
-      - 15672
-      - 25672
-    tty: true
 
   chrome:
     image: selenium/standalone-chrome:3.141.59-zinc
@@ -28,7 +20,7 @@ services:
     expose:
       - 4444
     networks:
-      - sel_network
+      - app_network
 
   formqa_service:
     image: formqa_service:latest
@@ -37,10 +29,9 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 8000:8080
+      - 8080:8080
     networks:
       - app_network
-      - sel_network
     restart: on-failure
     depends_on:
       - rabbitmq_server
@@ -50,9 +41,9 @@ services:
 
 networks:
   app_network:
-    external: true
-  sel_network:
-    external: true
+    name: app_network
+    driver: bridge
+    external: false
 
 volumes:
   formqa_service:

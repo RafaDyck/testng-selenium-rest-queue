@@ -27,7 +27,7 @@ public class AMQPConfig {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setUsername("guest");
         factory.setPassword("guest");
-        factory.setHost("172.19.0.2");
+        factory.setHost("rabbitmq_server");
         factory.setPort(5672);
         factory.setVirtualHost("/");
         LOGGER.info(" [*] Starting new AMQP Connection & Creating channel.");
