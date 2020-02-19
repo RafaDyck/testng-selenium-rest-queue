@@ -18,7 +18,7 @@ public class TestNGResultsController {
     }
 
     @GetMapping
-    public TestNGSuiteResult getBannerSuiteByBannerID(@RequestParam long bannerID) {
-        return testNGService.getSuiteResultByBannerID(bannerID);
+    public TestNGSuiteResult getBannerSuiteByFornID(@RequestParam long formID) {
+        return testNGService.getSuiteResultByFormID(formID);
     }
 }

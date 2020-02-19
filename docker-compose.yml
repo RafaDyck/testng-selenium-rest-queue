@@ -1,0 +1,60 @@
+version: "3.7"
+services:
+
+  rabbitmq_server:
+    image: rabbitmq:3.8.2-management
+    container_name: rabbitmq_server
+    networks:
+      - app_network
+    ports:
+      - 5672:5672
+      - 15672:15672
+    expose:
+      - 5672
+      - 5671
+      - 4369
+      - 15671
+      - 15672
+      - 25672
+    tty: true
+
+  chrome:
+    image: selenium/standalone-chrome:3.141.59-zinc
+    container_name: chrome_server
+    volumes:
+      - /dev/shm:/dev/shm
+    ports:
+      - 4444:4444
+    expose:
+      - 4444
+    networks:
+      - sel_network
+
+  formqa_service:
+    image: formqa_service:latest
+    container_name: formqa_service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8080
+    networks:
+      - app_network
+      - sel_network
+    restart: on-failure
+    depends_on:
+      - rabbitmq_server
+    tty: true
+    volumes:
+      - './src:/formqa_service_vol'
+
+networks:
+  app_network:
+    external: true
+  sel_network:
+    external: true
+
+volumes:
+  formqa_service:
+    name: formqa_service_vol
+    external: false

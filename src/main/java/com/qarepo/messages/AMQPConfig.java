@@ -25,8 +25,11 @@ public class AMQPConfig {
 
     public static Channel connect() throws IOException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
+        factory.setUsername("guest");
+        factory.setPassword("guest");
+        factory.setHost("172.19.0.2");
         factory.setPort(5672);
+        factory.setVirtualHost("/");
         LOGGER.info(" [*] Starting new AMQP Connection & Creating channel.");
         Connection connection = factory.newConnection();
         connectionChannel = connection.createChannel();

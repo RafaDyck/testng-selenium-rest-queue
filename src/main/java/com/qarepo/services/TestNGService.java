@@ -151,7 +151,7 @@ public class TestNGService {
         return testNGSuiteResultsRepository.findById(id);
     }
 
-    public TestNGSuiteResult getSuiteResultByBannerID(long id) {
-        return testNGSuiteResultsRepository.findByBannerID(id);
+    public TestNGSuiteResult getSuiteResultByFormID(long id) {
+        return testNGSuiteResultsRepository.findByFormID(id);
     }
 }
