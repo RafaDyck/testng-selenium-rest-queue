@@ -11,5 +11,5 @@ public interface TestNGSuiteResultsRepository extends PagingAndSortingRepository
 
     TestNGSuiteResult findById(long id);
 
-    TestNGSuiteResult findByBannerID(long bannerID);
+    TestNGSuiteResult findByFormID(long formID);
 }
